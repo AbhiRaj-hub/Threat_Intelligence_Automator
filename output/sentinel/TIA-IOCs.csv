@@ -1,0 +1,6 @@
+SearchKey,IndicatorType,Score,Sources,Tags,FirstSeen
+162.243.103.246,ip,100,feodo,botnet-c2,2026-11-24T04:44:40+00:00
+50.16.16.211,ip,95,feodo,botnet-c2,2026-11-24T04:44:40+00:00
+27.133.154.218,ip,95,feodo,botnet-c2,2026-11-24T04:44:40+00:00
+178.62.3.223,ip,85,feodo,botnet-c2,2026-11-24T04:44:40+00:00
+34.204.119.63,ip,70,feodo,botnet-c2,2026-11-24T04:44:40+00:00
