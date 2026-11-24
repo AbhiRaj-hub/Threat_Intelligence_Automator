@@ -22,7 +22,21 @@ def _yaml(path: Path) -> dict:
         return yaml.safe_load(fh) or {}
 
 
+def load_dotenv(path: str = ".env") -> None:
+    """Minimal .env loader (no dependency). Real environment variables win."""
+    f = Path(path)
+    if not f.is_file():
+        return
+    for line in f.read_text(encoding="utf-8-sig").splitlines():
+        line = line.strip()
+        if not line or line.startswith("#") or "=" not in line:
+            continue
+        k, v = line.split("=", 1)
+        os.environ.setdefault(k.strip(), v.strip().strip('"').strip("'"))
+
+
 def load(config_dir: str | None = None) -> Config:
+    load_dotenv()
     d = Path(config_dir or os.getenv("TIA_CONFIG_DIR", "config"))
     allow = _yaml(d / "allowlist.yaml").get("domains", [])
     return Config(

@@ -8,6 +8,7 @@ from pathlib import Path
 import httpx
 
 from . import collectors, enrichers
+from .collectors.base import CollectorSkipped
 from .outputs import digest, sentinel, sigma
 from .scoring import rescore_all
 from .storage import Store
@@ -21,6 +22,10 @@ def collect(cfg, store: Store, client: httpx.Client | None = None, collector_lis
     for c in collector_list if collector_list is not None else collectors.build(cfg):
         try:
             iocs = c.fetch(client)
+        except CollectorSkipped as skip:
+            log.warning("collector %s skipped: %s", c.name, skip)
+            stats[c.name] = {"skipped": str(skip)}
+            continue
         except Exception as exc:  # isolate collector failures
             log.error("collector %s failed: %s", c.name, exc)
             stats[c.name] = {"error": str(exc)}

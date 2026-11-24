@@ -1,11 +1,14 @@
 from __future__ import annotations
+
 from dataclasses import dataclass, field
 from datetime import datetime, timezone
 
 IOC_TYPES = ("ip", "domain", "url", "md5", "sha1", "sha256", "email", "cve")
 
+
 def utcnow() -> str:
     return datetime.now(timezone.utc).isoformat(timespec="seconds")
+
 
 @dataclass
 class IOC:
