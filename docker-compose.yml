@@ -1,0 +1,12 @@
+services:
+  tia:
+    build: .
+    env_file: .env
+    environment:
+      TIA_DB: /data/tia.db
+      TIA_OUT: /output
+    volumes:
+      - ./data:/data
+      - ./output:/output
+      - ./config:/app/config:ro
+    restart: unless-stopped
