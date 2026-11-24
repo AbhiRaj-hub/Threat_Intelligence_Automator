@@ -1,0 +1,15 @@
+default_weight: 0.30
+publish_threshold: 70   # auto-published to Sigma / Sentinel / blocklists
+review_threshold: 40    # 40-69 goes to review_queue.csv for an analyst
+half_life_days:         # confidence halves every N days since last seen
+  ip: 14
+  url: 14
+  domain: 30
+  md5: 180
+  sha1: 180
+  sha256: 180
+  email: 60
+  cve: 365
+enrichment:
+  budget_per_run: 25    # max API calls per run (protects free-tier quotas)
+  min_score: 30         # only enrich indicators already scoring >= this

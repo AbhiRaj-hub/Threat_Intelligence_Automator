@@ -1,0 +1,22 @@
+# weight = how much you trust the source (0-1). Multiple sources combine via noisy-OR.
+sources:
+  urlhaus:
+    enabled: true
+    weight: 0.60
+    # Needs a free Auth-Key (https://auth.abuse.ch/) in ABUSECH_AUTH_KEY; {auth_key} is filled in at runtime
+    url: https://urlhaus-api.abuse.ch/v2/files/exports/{auth_key}/urls_recent.txt
+  feodo:
+    enabled: true
+    weight: 0.85
+    url: https://feodotracker.abuse.ch/downloads/ipblocklist.txt
+  cisa_kev:
+    enabled: true
+    weight: 0.95
+    recent_days: 30
+    url: https://www.cisa.gov/sites/default/files/feeds/known_exploited_vulnerabilities.json
+  rss:
+    enabled: true
+    weight: 0.35
+    feeds:
+      - {name: thehackernews, url: "https://feeds.feedburner.com/TheHackersNews"}
+      - {name: bleepingcomputer, url: "https://www.bleepingcomputer.com/feed/"}
